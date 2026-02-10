@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Circolo Life | The Circle of Life</title>
-    <!-- Favicon con el Logo -->
+    
+    <!-- FAVICON (Navegador) -->
     <link rel="icon" type="image/png" href="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Gradient%20Icon@2x.png">
-    <!-- Fonts -->
+
+    <!-- WEB CLIP (Icono para iPhone/iPad/Android Home Screen) -->
+    <link rel="apple-touch-icon" href="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Gradient%20Icon@2x.png">
+
+    <!-- Fuentes de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
         /* --- BONE & QUIET LUXURY AESTHETIC --- */
         :root {
+            /* Tono Hueso más claro / Lighter Off-White */
             --bg-color: #F9F8F6; 
+            /* Tono secundario ajustado para mantener el contraste sutil */
             --bg-secondary: #F2F0EB; 
+            /* Texto Charcoal suave, no negro puro */
             --text-color: #222222; 
             --accent-color: #666666;
+            /* Líneas finas editoriales */
             --border-color: rgba(0, 0, 0, 0.06); 
             
             --font-serif: 'Cormorant Garamond', serif; 
@@ -26,6 +35,8 @@
         }
 
         * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
@@ -54,6 +65,8 @@
         body[dir="rtl"] .directory-item { flex-direction: row-reverse; }
         body[dir="rtl"] .directory-name { text-align: right; }
         body[dir="rtl"] .directory-role { text-align: right; }
+        body[dir="rtl"] .book-footer { flex-direction: row-reverse; }
+        body[dir="rtl"] .nav-dropdown { left: auto; right: 3rem; text-align: right; }
 
         /* --- TYPOGRAPHY --- */
         h1, h2, h3, h4, h5 {
@@ -144,11 +157,13 @@
             transition: all 0.5s ease;
         }
 
+        /* EFECTO CRISTAL MÁS TRANSPARENTE EN SCROLL */
         .main-header.scrolled {
-            background-color: rgba(249, 248, 246, 0.95);
+            background-color: rgba(249, 248, 246, 0.3); /* Mucho más transparente */
             padding: 1rem 3rem;
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(25px); /* Blur aumentado para compensar */
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -160,9 +175,10 @@
             width: auto;
             display: block;
             transition: all 0.3s ease;
+            z-index: 3001; 
         }
 
-        .header-left { display: flex; align-items: center; }
+        .header-left { display: flex; align-items: center; position: relative; }
         .header-right { display: flex; align-items: center; gap: 2rem; }
 
         .menu-trigger {
@@ -174,6 +190,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 3002;
+            position: relative;
         }
 
         .cta-btn {
@@ -191,6 +209,61 @@
 
         .cta-btn:hover { opacity: 0.6; }
 
+        /* --- MENU DROPDOWN MÁS TRANSPARENTE --- */
+        .nav-dropdown {
+            position: absolute;
+            top: 100%; 
+            left: 0;
+            margin-top: 15px; 
+            
+            /* Fondo Cristalino Muy Transparente */
+            background-color: rgba(249, 248, 246, 0.4); 
+            backdrop-filter: blur(30px); 
+            -webkit-backdrop-filter: blur(30px);
+            
+            min-width: 220px;
+            padding: 1.2rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* Borde casi imperceptible */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            z-index: 3000;
+        }
+
+        .nav-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 1.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
+            /* Sombra de texto sutil para legibilidad sobre fondo transparente */
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+        }
+        
+        .nav-link:last-child { border-bottom: none; }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #d4af37; 
+            padding-left: 1.8rem;
+        }
+
         /* --- LANGUAGE SELECTOR --- */
         .lang-selector {
             position: relative;
@@ -204,12 +277,7 @@
             z-index: 1001;
         }
 
-        .current-lang {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            justify-content: flex-end;
-        }
+        .current-lang { display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
 
         .lang-dropdown {
             position: absolute;
@@ -227,11 +295,7 @@
             text-align: right;
         }
 
-        .lang-selector:hover .lang-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .lang-selector:hover .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
 
         .lang-dropdown span {
             display: block;
@@ -276,46 +340,45 @@
             transition: transform 6s ease;
         }
         
-        /* Capa de oscurecimiento (Overlay Oscuro) para texto BLANCO */
+        /* Overlay Oscuro para Texto Blanco */
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Gradiente oscuro sutil para resaltar texto blanco */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%);
             z-index: 2;
         }
         
-        .hero:hover .hero-bg-img { 
-            transform: scale(1.03);
-        }
+        .hero:hover .hero-bg-img { transform: scale(1.03); }
         
         .hero-content { 
             position: relative; 
             z-index: 3; 
-            max-width: 1000px; 
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
         /* Estilos específicos para el contenido del Hero en BLANCO */
         .hero-content h1 {
             color: #FFFFFF;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3); /* Sombra elegante para legibilidad */
+            text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+            font-weight: 300;
         }
         
         .hero-content p {
             color: #FFFFFF;
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-top: 1.5rem;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-weight: 500;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.6);
         }
 
         /* --- SECTIONS --- */
         .section-spacer { padding: 8rem 3rem; }
         .text-center { text-align: center; }
 
-        /* --- MANIFIESTO --- */
+        /* --- MANIFIESTO (FIXED LAYOUT) --- */
         .manifesto {
             background-color: var(--bg-color);
             display: flex;
@@ -325,14 +388,16 @@
             padding-top: 8rem;
             padding-bottom: 8rem;
             border-bottom: 1px solid var(--border-color);
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .manifesto-text {
             font-family: var(--font-serif);
             font-size: 2.2rem;
             text-align: center;
-            line-height: 1.4;
-            max-width: 850px;
+            line-height: 1.5;
+            max-width: 680px;
             color: #111;
             margin-bottom: 2.5rem;
             font-weight: 300;
@@ -377,7 +442,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* --- SHAPE SYSTEM GRID (THE 4 PILLARS) --- */
+        /* --- SHAPE SYSTEM GRID --- */
         .shapes-section {
             padding: 8rem 4rem;
             background-color: var(--bg-color);
@@ -687,139 +752,258 @@
             overflow: hidden;
         }
 
-        /* --- TEAM DIRECTORY --- */
-        .directory-section {
+        /* --- JOURNAL SECTION (NUEVO) --- */
+        .journal-section {
             padding: 8rem 4rem;
-            background-color: var(--bg-color);
+            background-color: var(--bg-color); /* Hueso */
             border-top: 1px solid var(--border-color);
         }
 
-        .directory-container {
-            max-width: 1100px;
+        .journal-grid {
+            max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
         }
 
-        .directory-list {
+        .journal-card {
             display: flex;
             flex-direction: column;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: opacity 0.3s;
+            border-top: 1px solid var(--border-color); /* Línea editorial superior */
+            padding-top: 1.5rem;
+        }
+
+        .journal-card:hover { opacity: 0.7; }
+
+        .journal-date {
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+            margin-bottom: 0.8rem;
+        }
+
+        .journal-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+        }
+
+        .journal-excerpt {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER LOGO FIX --- */
+        .footer-logo {
+            height: 35px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- BOOK STYLE TEAM SECTION (MINIMALIST & INTEGRATED) --- */
+        .collective-section {
+            background-color: var(--bg-color); /* Fondo Hueso */
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
             border-top: 1px solid var(--border-color);
         }
 
-        .directory-item {
+        .book-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 4/5;
+            perspective: 1000px;
+        }
+
+        .book-page {
+            background-color: var(--bg-color); /* Coincide con fondo */
+            width: 100%;
+            height: 100%;
+            position: relative;
+            padding: 4rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-color);
-            text-decoration: none;
-            color: var(--text-color);
-            transition: background-color 0.3s ease, padding 0.3s ease;
+            text-align: center;
+            
+            /* Sombra suave */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08), 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 2px;
+            border: 1px solid rgba(0,0,0,0.02);
+            
+            /* Textura sutil */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
         }
 
-        .directory-item:hover {
-            background-color: var(--bg-secondary);
-            padding-left: 2rem;
-            padding-right: 2rem;
+        /* Efecto de páginas apiladas */
+        .book-container::before {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: -4px; bottom: -4px;
+            background-color: #EBE9E4;
+            z-index: -1;
+            border-radius: 2px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .book-container::after {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: -8px; bottom: -8px;
+            background-color: #DFDBD6;
+            z-index: -2;
+            border-radius: 2px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
-        .directory-info {
+        /* Contenido de la Página */
+        .book-header {
+            position: absolute;
+            top: 3rem;
+            left: 0; 
+            width: 100%;
+            text-align: center;
+        }
+
+        .page-indicator {
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            color: #ccc;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .content-center {
             display: flex;
-            gap: 4rem;
-            align-items: baseline;
-            flex-grow: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; 
+            width: 100%;
         }
 
-        .directory-name {
+        .member-name-large {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 400;
-            min-width: 300px;
-            letter-spacing: -0.01em;
+            font-size: 4rem; 
+            font-weight: 300;
+            color: #1a1a1a;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
         }
 
-        .directory-role {
+        .member-role-small {
             font-family: var(--font-sans);
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             color: #888;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
-        .directory-link {
+        .member-link-icon {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .member-link-icon:hover {
+            border-color: #1a1a1a;
+            opacity: 0.7;
+        }
+
+        /* Controles de Navegación */
+        .book-footer {
+            position: absolute;
+            bottom: 3rem;
+            left: 4rem;
+            right: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05); 
+            padding-top: 1.5rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #999;
             font-family: var(--font-sans);
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-color);
-            opacity: 0.4;
-            transition: opacity 0.3s;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .directory-item:hover .directory-link { opacity: 1; }
+        .nav-btn:hover { color: #1a1a1a; }
+        .nav-btn:disabled { opacity: 0.3; cursor: default; }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid var(--border-color);
-            margin-top: 0;
-            background-color: var(--bg-color);
+        .progress-bar-mini {
+            width: 60px;
+            height: 1px;
+            background-color: #eee;
+            position: relative;
         }
 
-        .footer-col { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-link {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #111;
-            text-decoration: none;
-            opacity: 0.5;
-            transition: opacity 0.3s;
+        .progress-fill-mini {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            background-color: #1a1a1a;
+            width: 0%; 
+            transition: width 0.3s ease;
         }
-        .footer-link:hover { opacity: 1; }
 
-        @media (max-width: 1024px) {
-            .heading-xl { font-size: 3rem; }
-            .shape-grid { grid-template-columns: repeat(2, 1fr); border-right: 1px solid var(--border-color); }
-            .shape-card:nth-child(2n) { border-right: none; }
-            .press-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-            .stats-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .stat-item:not(:last-child)::after { display: none; }
-            /* Ajuste de logo en tablets */
-            .logo { height: 60px; }
-            footer { flex-direction: column; align-items: center; gap: 3rem; text-align: center; }
-        }
-        
         @media (max-width: 768px) {
-             .section-spacer { padding: 5rem 1.5rem; }
-             .shape-grid { grid-template-columns: 1fr; border-right: none; }
-             .shape-card { border-right: none; }
-             .press-grid { grid-template-columns: 1fr; }
-             .heading-xl { font-size: 2.5rem; }
-             .manifesto-text { font-size: 1.6rem; }
-             
-             /* Directory Mobile */
-             .directory-info { flex-direction: column; gap: 0.5rem; }
-             .directory-name { font-size: 1.4rem; min-width: auto; }
-             .directory-item { align-items: flex-start; padding: 1.5rem 0; }
-             .directory-link { margin-top: 1rem; align-self: flex-start; }
-             .hero-image-container { left: 1rem; right: 1rem; top: 1rem; bottom: 1rem; }
-             
-             /* Ajuste de logo en móvil para que no choque con menú */
-             .logo { height: 45px; }
-             
-             /* Ajuste Glass Card en móvil */
-             .glass-card h1 { font-size: 2rem; }
-             .glass-card p { font-size: 0.7rem; letter-spacing: 2px; }
-             .glass-card { padding: 30px 20px; width: 90%; }
+            .heading-xl { font-size: 2.5rem; }
+            .hero-image-container { left: 1rem; right: 1rem; top: 1rem; bottom: 1rem; }
+            .shape-grid { grid-template-columns: 1fr; border-right: none; }
+            .shape-card { border-right: none; }
+            .press-grid { grid-template-columns: 1fr; }
+            .logo { height: 45px; }
+            .manifesto-text { font-size: 1.6rem; padding: 0 1rem; }
+            .book-container { max-width: 100%; aspect-ratio: auto; height: 500px; }
+            .member-name-large { font-size: 2.8rem; }
+            .book-page { padding: 3rem 2rem; }
+            .book-footer { left: 2rem; right: 2rem; bottom: 2rem; }
+            /* Mobile Nav Dropdown */
+            .nav-dropdown { right: 0; left: auto; min-width: 180px; }
+            .journal-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
 
-        /* --- WHATSAPP WIDGET UNIFICADO (LUJO SILENCIOSO) --- */
+        /* --- WHATSAPP WIDGET --- */
         .whatsapp-widget {
             position: fixed;
             bottom: 40px;
@@ -830,32 +1014,30 @@
             align-items: center;
         }
 
-        /* Botón Principal (Trigger) - ACTUALIZADO: SOLO LOGO */
+        /* Botón Principal (Trigger) */
         .whatsapp-trigger {
-            width: 65px; /* Ligeramente más grande para que el logo luzca */
+            width: 65px; 
             height: 65px;
-            background-color: transparent; /* Fondo transparente */
-            border: none; /* Sin borde */
+            background-color: transparent;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: none; /* Sombra en la caja eliminada */
+            box-shadow: none;
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            /* Sin backdrop-filter */
         }
 
         .whatsapp-widget:hover .whatsapp-trigger {
-            background-color: transparent; /* Mantiene transparencia al hover */
-            transform: scale(1.1) rotate(15deg); /* Efecto sutil de escala y rotación */
+            background-color: transparent;
+            transform: scale(1.1) rotate(15deg);
         }
         
-        /* La inversión de color se elimina para mantener el gradiente original */
         .whatsapp-widget:hover .whatsapp-trigger .whatsapp-icon-img {
-            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15)); /* Sombra más profunda al hover */
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15));
         }
 
-        /* Contenedor de Opciones (Oculto por defecto) */
+        /* Contenedor de Opciones */
         .whatsapp-options {
             display: flex;
             flex-direction: column;
@@ -878,7 +1060,7 @@
             width: 50px;
             height: 50px;
             background-color: var(--bg-color);
-            border: 1px solid rgba(0,0,0,0.05); /* Borde muy sutil */
+            border: 1px solid rgba(0,0,0,0.05);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -926,208 +1108,48 @@
             visibility: visible;
         }
 
-        /* Estilos actualizados para la imagen del icono - Ocupa todo el trigger */
         .whatsapp-icon-img { 
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
             transition: filter 0.4s ease; 
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); /* Sombra suave aplicada a la imagen */
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
         }
         
         .whatsapp-icon-small { width: 20px; height: 20px; fill: var(--text-color); transition: fill 0.3s; }
 
-        /* --- FOOTER LOGO FIX --- */
-        /* Clase específica para evitar que el logo se deforme en el footer */
-        .footer-logo {
-            height: 35px; /* Altura controlada */
-            width: auto;  /* Ancho automático para mantener proporción */
-            display: block;
-            object-fit: contain; /* Asegura que no se estire ni aplaste */
-            margin-bottom: 0.5rem;
-        }
-
-        /* --- BOOK STYLE TEAM SECTION (MINIMALIST & INTEGRATED) --- */
-        .collective-section {
-            /* Fondo Hueso para integrar con el resto ("Completo") */
-            background-color: var(--bg-color); 
-            padding: 6rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-            border-top: 1px solid var(--border-color); /* Separador sutil */
-        }
-
-        .book-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px; /* Ligeramente más ancho */
-            aspect-ratio: 4/5; /* Proporción más clásica de editorial */
-            perspective: 1000px;
-        }
-
-        .book-page {
-            /* CAMBIO APLICADO: Color Hueso (var(--bg-color)) en lugar de Blanco (#FFFFFF) */
-            background-color: var(--bg-color); 
-            width: 100%;
-            height: 100%;
-            position: relative;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            
-            /* Sombra ajustada ligeramente para definir bordes sobre el mismo color de fondo */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08), 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 2px;
-            border: 1px solid rgba(0,0,0,0.02); /* Borde casi invisible para definición extra */
-            
-            /* Textura de papel imperceptible */
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            
-            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
-        }
-
-        /* Efecto de páginas apiladas debajo (Ajustado para armonizar con el hueso) */
-        .book-container::before {
-            content: '';
-            position: absolute;
-            top: 4px; left: 4px; right: -4px; bottom: -4px;
-            background-color: #EBE9E4; /* Un tono ligeramente más oscuro que el hueso para simular sombra/papel */
-            z-index: -1;
-            border-radius: 2px;
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .book-container::after {
-            content: '';
-            position: absolute;
-            top: 8px; left: 8px; right: -8px; bottom: -8px;
-            background-color: #DFDBD6; /* Un poco más oscuro */
-            z-index: -2;
-            border-radius: 2px;
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* Contenido de la Página */
-        .book-header {
-            position: absolute;
-            top: 3rem;
-            left: 0; 
-            width: 100%;
-            text-align: center;
-        }
-
-        .page-indicator {
-            font-family: var(--font-sans);
-            font-size: 0.6rem;
-            color: #ccc;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .content-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1; /* Ocupa el espacio central */
-            width: 100%;
-        }
-
-        .member-name-large {
-            font-family: var(--font-serif);
-            font-size: 4rem; /* Más grande y fino */
-            font-weight: 300;
-            color: #1a1a1a;
-            line-height: 1;
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-        }
-
-        .member-role-small {
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: #888;
-            margin-bottom: 2.5rem;
-            font-weight: 400;
-        }
-
-        .member-link-icon {
-            text-decoration: none;
-            color: #1a1a1a;
-            font-family: var(--font-sans);
-            font-size: 0.65rem;
-            border-bottom: 1px solid #ddd; /* Solo línea abajo para más limpieza */
-            padding-bottom: 3px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .member-link-icon:hover {
-            border-color: #1a1a1a;
-            opacity: 0.7;
-        }
-
-        /* Controles de Navegación (INTEGRADOS) */
-        .book-footer {
-            position: absolute;
-            bottom: 3rem;
-            left: 4rem;
-            right: 4rem;
+        /* FOOTER */
+        footer {
+            padding: 5rem 3rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(0,0,0,0.05); /* Línea muy sutil */
-            padding-top: 1.5rem;
+            align-items: flex-end;
+            border-top: 1px solid var(--border-color);
+            margin-top: 0;
+            background-color: var(--bg-color);
         }
 
-        .nav-btn {
-            background: transparent;
-            border: none;
-            color: #999;
-            font-family: var(--font-sans);
-            font-size: 0.65rem;
+        .footer-col { display: flex; flex-direction: column; gap: 1rem; }
+        .footer-link {
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            cursor: pointer;
-            transition: color 0.3s;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: #111;
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.3s;
         }
+        .footer-link:hover { opacity: 1; }
 
-        .nav-btn:hover { color: #1a1a1a; }
-        .nav-btn:disabled { opacity: 0.3; cursor: default; }
-
-        .progress-bar-mini {
-            width: 60px;
-            height: 1px;
-            background-color: #eee;
-            position: relative;
-        }
-
-        .progress-fill-mini {
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            background-color: #1a1a1a;
-            width: 0%; 
-            transition: width 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .book-container { max-width: 100%; aspect-ratio: auto; height: 500px; }
-            .member-name-large { font-size: 2.8rem; }
-            .book-page { padding: 3rem 2rem; }
-            .book-footer { left: 2rem; right: 2rem; bottom: 2rem; }
+        @media (max-width: 1024px) {
+            .heading-xl { font-size: 3rem; }
+            .shape-grid { grid-template-columns: repeat(2, 1fr); border-right: 1px solid var(--border-color); }
+            .shape-card:nth-child(2n) { border-right: none; }
+            .press-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .stat-item:not(:last-child)::after { display: none; }
+            .logo { height: 60px; }
+            footer { flex-direction: column; align-items: center; gap: 3rem; text-align: center; }
         }
     </style>
 </head>
@@ -1136,11 +1158,23 @@
     <!-- HEADER -->
     <header class="main-header" id="header">
         <div class="header-left">
-            <div class="menu-trigger">
-                <span data-i18n="menu">Menu</span>
+            <div class="menu-trigger" onclick="toggleMenu()">
+                <span data-i18n="menu" id="menu-text">Menu</span>
+                
+                <!-- MENU DROPDOWN LIST -->
+                <div id="nav-dropdown" class="nav-dropdown">
+                    <a href="#concept" class="nav-link">The Concept</a>
+                    <a href="#shapes" class="nav-link">The Shape System</a>
+                    <a href="#context" class="nav-link">The Human Problem</a>
+                    <a href="#projects" class="nav-link">Iconic 2026</a>
+                    <a href="#press" class="nav-link">Signal & Press</a>
+                    <a href="#team" class="nav-link">The Collective</a>
+                    <a href="#journal" class="nav-link">The Journal</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
             </div>
         </div>
-        <!-- Logo Image Updated (Size adjusted in CSS) -->
+        <!-- Logo -->
         <img class="logo" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Logo%20without%20life-09.png" alt="CIRCOLO">
         <div class="header-right">
             <div class="lang-selector">
@@ -1151,31 +1185,28 @@
                     <span onclick="setLanguage('ar')">AR</span>
                 </div>
             </div>
-            <button class="cta-btn" data-i18n="inquire">Inquire</button>
+            <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i18n="inquire">Inquire</button>
         </div>
     </header>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-image-container">
-            <!-- Updated Hero Image to reflect 'Legacy' concept -->
             <img class="hero-bg-img" 
                  src="https://uploads.onecompiler.io/4474z9257/44ad3qvge/DSCF0074.webp" 
                  onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea9ba6a80f4?q=80&w=2070&auto=format&fit=crop'"
                  alt="Circolo Legacy">
-            <!-- Overlay oscuro restaurado para texto blanco -->
             <div class="hero-overlay"></div>
         </div>
         
         <div class="hero-content">
-            <!-- Texto restaurado a BLANCO (#FFFFFF) -->
             <h1 class="heading-xl" data-i18n="heroTitle">Creating Legacy Experiences</h1>
             <p data-i18n="heroSub">Built for humans of now and the future</p>
         </div>
     </section>
 
-    <!-- MANIFESTO (Updated from PDF) -->
-    <section class="manifesto">
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="concept">
         <span class="subtitle" data-i18n="manifestoLabel">THE CONCEPT</span>
         <p class="manifesto-text" data-i18n="manifestoText">
             What is life? Life is a sequence of moments, shaped by people, anchored in places, and remembered through objects.
@@ -1183,13 +1214,11 @@
         <p class="manifesto-sub" style="text-align: center;" data-i18n="manifestoSub">
             We are The Culture Layer for Living Legacy Experiences.
         </p>
-        <!-- Link "Read 2026 Paper" eliminado -->
     </section>
 
-    <!-- NEW: CLIENT MARQUEE -->
+    <!-- CLIENT MARQUEE -->
     <div class="marquee-container">
         <div class="marquee-track">
-            <!-- SET 1 -->
             <span class="marquee-item">Blacklane</span>
             <span class="marquee-item">Daos Hub</span>
             <span class="marquee-item">New Tribe Capital</span>
@@ -1221,8 +1250,7 @@
             <span class="marquee-item">Alkalime</span>
             <span class="marquee-item">BNB Chain</span>
             <span class="marquee-item">Chi Longevity Services</span>
-
-            <!-- SET 2 (Duplicate for Loop) -->
+            <!-- Duplicate for Loop -->
             <span class="marquee-item">Blacklane</span>
             <span class="marquee-item">Daos Hub</span>
             <span class="marquee-item">New Tribe Capital</span>
@@ -1257,8 +1285,8 @@
         </div>
     </div>
 
-    <!-- NEW: THE SHAPE SYSTEM (PILLARS) -->
-    <section class="shapes-section">
+    <!-- THE SHAPE SYSTEM (PILLARS) -->
+    <section class="shapes-section" id="shapes">
         <div class="text-center" style="margin-bottom: 6rem;">
             <span class="subtitle" data-i18n="shapesSubtitle">THE SHAPE SYSTEM</span>
             <h2 class="heading-l" data-i18n="shapesTitle">Design the Circle</h2>
@@ -1316,8 +1344,8 @@
         </div>
     </section>
 
-    <!-- NEW: CONTEXT / WHY NOW -->
-    <section class="context-section">
+    <!-- CONTEXT / WHY NOW -->
+    <section class="context-section" id="context">
         <span class="subtitle" data-i18n="contextSubtitle">THE HUMAN PROBLEM</span>
         <h2 class="heading-l" style="max-width: 800px; text-align: center; margin-bottom: 2rem;" data-i18n="contextTitle">Connection is no longer optional. It is infrastructure.</h2>
         
@@ -1337,8 +1365,8 @@
         </div>
     </section>
 
-    <!-- PROJECTS CAROUSEL (Updated Labels) -->
-    <section class="project-carousel-section">
+    <!-- PROJECTS CAROUSEL -->
+    <section class="project-carousel-section" id="projects">
         <div class="text-center" style="padding-top: 6rem;">
             <span class="subtitle" data-i18n="globalSubtitle">ICONIC 2026</span>
             <h2 class="heading-l" data-i18n="globalTitle">Across Borders</h2>
@@ -1346,7 +1374,6 @@
 
         <div class="project-carousel-container">
             <div class="project-carousel-track">
-                <!-- Items updated to reflect Shapes/Pillars concept lightly in text -->
                 <div class="project-card-slide">
                     <div class="slide-image-wrapper">
                         <img src="https://cdn.prod.website-files.com/64e21a34e41da63fe4f44c5a/6685fc6b4013b3e57e64dc68_pexels-blue-earth-photo-921252577-19965890%20(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea9ba6a80f4?q=80&w=2070&auto=format&fit=crop'" alt="UAE Project">
@@ -1395,7 +1422,6 @@
                     <h3 class="slide-title">Crypto Coffee</h3>
                     <span class="slide-client">+ EDITION / MEDELLIN</span>
                 </div>
-                <!-- Duplicate for loop -->
                  <div class="project-card-slide">
                     <div class="slide-image-wrapper">
                         <img src="https://cdn.prod.website-files.com/64e21a34e41da63fe4f44c5a/6685fc6b4013b3e57e64dc68_pexels-blue-earth-photo-921252577-19965890%20(1).jpg" onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea9ba6a80f4?q=80&w=2070&auto=format&fit=crop'" alt="UAE Project">
@@ -1416,13 +1442,12 @@
         </div>
     </section>
 
-    <!-- PRESS SECTION (UPDATED REAL LINKS & IMAGES) -->
-    <section class="press-section">
+    <!-- PRESS SECTION -->
+    <section class="press-section" id="press">
         <div class="text-center" style="margin-bottom: 6rem;">
             <span class="subtitle" data-i18n="pressSubtitle">SIGNAL & PRESS</span>
         </div>
         <div class="press-grid">
-            <!-- 1. CoinMarketCap -->
              <a href="https://coinmarketcap.com/community/articles/68a8266f8c34f9397ee4ecd9/" target="_blank" class="press-card">
                 <div class="press-image-wrapper">
                     <img src="https://academy-public.coinmarketcap.com/srd-optimized-uploads/13c929bec0c7456dba7a8da772b7865c.png" onerror="this.src='https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=2070&auto=format&fit=crop'" alt="CoinMarketCap Feature">
@@ -1431,7 +1456,6 @@
                 <h4 class="press-title">Circolo Community: A New Era of Connection</h4>
                 <p class="press-description">CoinMarketCap highlights how Circolo is redefining community engagement through immersive experiences.</p>
             </a>
-            <!-- 2. Khaleej Times -->
             <a href="https://www.khaleejtimes.com/business/the-exclusive-token2049-private-dinner-everyones-talking-about" target="_blank" class="press-card">
                 <div class="press-image-wrapper">
                     <img src="https://imgengine.khaleejtimes.com/khaleejtimes-english/2025-04-24/uepxcsdn/TOKEN49IXI.jpeg?width=1200&height=800&format=auto" alt="Khaleej Times Feature">
@@ -1440,7 +1464,6 @@
                 <h4 class="press-title">The Exclusive TOKEN2049 Private Dinner</h4>
                 <p class="press-description">Circolo and IXI Labs hosted an unforgettable evening at CÉ LA VI Dubai, bringing together Web3 leaders.</p>
             </a>
-            <!-- 3. Blockopedia (Arepa) -->
             <a href="https://theblockopedia.com/circolo-makes-history-at-token2049-the-first-real-arepa-in-the-world-gets-tokenized/" target="_blank" class="press-card">
                 <div class="press-image-wrapper">
                     <img src="https://theblockopedia.com/wp-content/uploads/2025/05/Untitled-design-1_11zon.png" alt="Tokenized Arepa">
@@ -1449,7 +1472,6 @@
                 <h4 class="press-title">History at TOKEN2049: The First Tokenized Arepa</h4>
                 <p class="press-description">A groundbreaking moment where culinary tradition meets blockchain innovation.</p>
             </a>
-            <!-- 4. Blockopedia (Impact) -->
             <a href="https://theblockopedia.com/circolo-curates-the-most-impactful-web3-experiences-during-token2049-dubai/" target="_blank" class="press-card">
                 <div class="press-image-wrapper">
                     <img src="https://theblockopedia.com/wp-content/uploads/2025/04/Untitled-design-16.jpg" alt="Impactful Experiences">
@@ -1461,26 +1483,50 @@
         </div>
     </section>
 
-    <!-- NEW TEAM DIRECTORY (BOOK STYLE - INTEGRATED) -->
-    <section class="collective-section">
+    <!-- JOURNAL SECTION (NUEVO) -->
+    <section class="journal-section" id="journal">
+        <div class="text-center" style="margin-bottom: 6rem;">
+            <span class="subtitle">THE JOURNAL</span>
+        </div>
+        <div class="journal-grid">
+            <!-- Article 1 -->
+            <a href="#" class="journal-card">
+                <span class="journal-date">OCTOBER 24, 2025</span>
+                <h4 class="journal-title">The Future of Legacy</h4>
+                <p class="journal-excerpt">Why experiences are the new asset class for the modern era.</p>
+            </a>
+            <!-- Article 2 -->
+            <a href="#" class="journal-card">
+                <span class="journal-date">NOVEMBER 12, 2025</span>
+                <h4 class="journal-title">Silence as Strategy</h4>
+                <p class="journal-excerpt">In a noisy world, quiet luxury speaks volumes. How we design for peace.</p>
+            </a>
+            <!-- Article 3 -->
+            <a href="#" class="journal-card">
+                <span class="journal-date">DECEMBER 05, 2025</span>
+                <h4 class="journal-title">Beyond the Event</h4>
+                <p class="journal-excerpt">Transforming fleeting moments into lasting cultural impact.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- TEAM DIRECTORY (BOOK STYLE - INTEGRATED) -->
+    <section class="collective-section" id="team">
         <h2 class="heading-l" style="margin-bottom: 3rem; text-align: center;" data-i18n="teamTitle">The Collective</h2>
         
         <div class="book-container">
             <div class="book-page" id="bookPage">
                 
-                <!-- Header interno: Página -->
                 <div class="book-header">
                     <span class="page-indicator" id="pageNumber">01 / 12</span>
                 </div>
 
-                <!-- Contenido Central -->
                 <div class="content-center">
                     <h3 class="member-name-large" id="memberName">Alvaro Daza</h3>
                     <span class="member-role-small" id="memberRole">Founder & CEO</span>
                     <a href="https://www.linkedin.com/in/alvdaza/" target="_blank" class="member-link-icon" id="memberLink">Open Profile ↗</a>
                 </div>
 
-                <!-- Footer interno: Navegación -->
                 <div class="book-footer">
                     <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">← Prev</button>
                     <div class="progress-bar-mini"><div class="progress-fill-mini" id="progressFill" style="width: 8%;"></div></div>
@@ -1492,28 +1538,23 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer id="contact">
         <div class="footer-col">
-            <!-- Logo Image Updated with specific class to fix aspect ratio -->
             <img class="footer-logo" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Logo%20without%20life-09.png" alt="CIRCOLO">
             <p style="font-size: 0.75rem; margin: 0.5rem 0 0 0; color: #888;">© 2026 Circolo Life. LEAAS.</p>
         </div>
         <div class="footer-col" style="flex-direction: row; gap: 3rem;">
             <a href="https://www.instagram.com/circolo.life/" target="_blank" class="footer-link">Instagram</a>
             <a href="https://www.linkedin.com/company/circololife/posts/?feedView=all" target="_blank" class="footer-link">LinkedIn</a>
-            <a href="#" class="footer-link" data-i18n="contact">Contact</a>
+            <a href="mailto:info@circololife.com" class="footer-link" data-i18n="contact">Contact</a>
         </div>
     </footer>
 
-    <!-- WHATSAPP WIDGET (UNIFICADO) -->
+    <!-- WHATSAPP WIDGET -->
     <div class="whatsapp-widget">
-        <!-- Trigger Button (Icono Principal Actualizado) -->
         <div class="whatsapp-trigger">
-            <!-- Icono Imagen Reemplazado por Gradient Icon -->
             <img class="whatsapp-icon-img" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Gradient%20Icon@2x.png" alt="Contact">
         </div>
-        
-        <!-- Opciones Desplegables -->
         <div class="whatsapp-options">
             <a href="https://wa.link/aq8x7a" target="_blank" class="whatsapp-opt" data-label="Contact I">
                 <svg class="whatsapp-icon-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -1524,7 +1565,42 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script>
+        // MENU LOGIC
+        function toggleMenu() {
+            const dropdown = document.getElementById('nav-dropdown');
+            const menuText = document.getElementById('menu-text');
+            
+            // Toggle class open
+            if (dropdown.classList.contains('open')) {
+                dropdown.classList.remove('open');
+                menuText.textContent = "Menu";
+            } else {
+                dropdown.classList.add('open');
+                menuText.textContent = "Close";
+            }
+        }
+        
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-dropdown').classList.remove('open');
+                document.getElementById('menu-text').textContent = "Menu";
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('nav-dropdown');
+            const trigger = document.querySelector('.menu-trigger');
+            
+            if (!trigger.contains(event.target) && dropdown.classList.contains('open')) {
+                dropdown.classList.remove('open');
+                document.getElementById('menu-text').textContent = "Menu";
+            }
+        });
+
         // Data for Team Members
         const teamMembers = [
             { name: "Alvaro Daza", role: "Founder & CEO", link: "https://www.linkedin.com/in/alvdaza/" },
@@ -1568,8 +1644,11 @@
                 if (member.link) {
                     linkElem.href = member.link;
                     linkElem.style.display = 'inline-block';
+                    linkElem.textContent = "Open Profile ↗";
                 } else {
-                    linkElem.style.display = 'none';
+                    linkElem.style.display = 'inline-block';
+                    linkElem.textContent = "—";
+                    linkElem.href = "#";
                 }
 
                 // Update Progress Bar
@@ -1592,7 +1671,6 @@
                 manifestoLabel: "THE CONCEPT",
                 manifestoText: "Life is a sequence of moments, shaped by people, anchored in places, and remembered through objects.",
                 manifestoSub: "We are The Culture Layer for Living Legacy Experiences.",
-                readPaper: "Read 2026 Paper",
                 shapesSubtitle: "THE SHAPE SYSTEM",
                 shapesTitle: "Design the Circle",
                 shapesText: "Most industries treat life as fragments. We build the system that makes the pieces compound.",
@@ -1628,7 +1706,6 @@
                 manifestoLabel: "EL CONCEPTO",
                 manifestoText: "La vida es una secuencia de momentos, moldeados por personas, anclados en lugares y recordados a través de objetos.",
                 manifestoSub: "Somos la Capa Cultural para Experiencias de Legado Vivo.",
-                readPaper: "Leer Paper 2026",
                 shapesSubtitle: "SISTEMA DE FORMAS",
                 shapesTitle: "Diseña el Círculo",
                 shapesText: "La mayoría de industrias tratan la vida como fragmentos. Nosotros construimos el sistema que hace que las piezas se compongan.",
@@ -1664,7 +1741,6 @@
                 manifestoLabel: "المفهوم",
                 manifestoText: "الحياة سلسلة من اللحظات، تشكلها الناس، وترتكز في الأماكن، وتُذكر من خلال الأشياء.",
                 manifestoSub: "نحن الطبقة الثقافية لتجارب الإرث الحية.",
-                readPaper: "اقرأ ورقة 2026",
                 shapesSubtitle: "نظام الأشكال",
                 shapesTitle: "صمم الدائرة",
                 shapesText: "تتعامل معظم الصناعات مع الحياة كشظايا. نحن نبني النظام الذي يجعل القطع تتكامل.",
