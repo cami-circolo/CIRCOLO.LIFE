@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turning Events into Experiences | Circolo Journal</title>
+    <title>Measuring Experience Design | Circolo Journal</title>
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Gradient%20Icon@2x.png">
@@ -14,7 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- ESTILOS -->
     <style>
         /* --- BONE & QUIET LUXURY AESTHETIC --- */
         :root {
@@ -81,8 +80,8 @@
 
         .article-title {
             font-family: var(--font-serif);
-            font-size: 2.8rem; 
-            line-height: 1.15;
+            font-size: 3rem; 
+            line-height: 1.1;
             font-weight: 400;
             margin: 0 0 1.5rem 0;
             color: #1a1a1a;
@@ -98,7 +97,6 @@
             margin-top: 1rem;
         }
 
-        /* Article Image */
         .article-hero-img {
             width: 100%;
             height: auto; 
@@ -108,90 +106,47 @@
             border-radius: 2px;
         }
 
-        /* Cuerpo del Artículo */
-        .article-body {
-            font-size: 1.1rem;
-            color: #333;
-        }
+        .article-body { font-size: 1.1rem; color: #333; }
+        .article-body p { margin-bottom: 2rem; font-family: var(--font-serif); font-size: 1.3rem; line-height: 1.8; color: #2a2a2a; }
+        .article-body h3 { font-family: var(--font-sans); font-size: 1.2rem; margin-top: 3.5rem; margin-bottom: 1.5rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #111; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .article-body h4 { font-family: var(--font-serif); font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 400; color: #1a1a1a; }
+        .article-body ul { list-style-type: none; padding: 0; margin-bottom: 2rem; }
+        .article-body li { font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; border-left: 2px solid #d4af37; }
+        .article-body strong { font-weight: 600; color: #000; font-family: var(--font-sans); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .article-body p {
-            margin-bottom: 2rem;
+        .article-body blockquote {
+            border-left: 2px solid #d4af37;
+            margin: 3rem 0;
+            padding-left: 2rem;
             font-family: var(--font-serif);
-            font-size: 1.3rem; 
-            line-height: 1.8;
-            color: #2a2a2a;
-        }
-
-        .article-body h3 {
-            font-family: var(--font-sans);
-            font-size: 1.2rem;
-            margin-top: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-style: italic;
+            font-size: 1.8rem;
             color: #111;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-        
-        .article-body ul {
-            list-style-type: none;
-            padding: 0;
-            margin-bottom: 3rem;
-        }
-        
-        .article-body li {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.2rem;
-            padding-left: 1.5rem;
-            border-left: 2px solid #d4af37; /* Detalle dorado */
-            color: #333;
+            line-height: 1.3;
         }
 
-        .article-body strong {
-            font-family: var(--font-sans);
-            font-weight: 500;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #111;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-
-        /* Botón Volver */
-        .back-nav {
-            margin-top: 5rem;
-            padding-top: 3rem;
+        .references {
+            margin-top: 4rem;
+            padding-top: 2rem;
             border-top: 1px solid var(--border-color);
-            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: #777;
         }
 
-        .back-link {
-            text-decoration: none;
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
+        .references h5 {
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-color);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
+            margin-bottom: 1rem;
+            color: #555;
         }
 
+        .back-nav { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); text-align: center; }
+        .back-link { text-decoration: none; font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-color); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
         .back-link:hover { border-bottom-color: var(--text-color); }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-        }
+        footer { padding: 5rem 3rem; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--border-color); background-color: var(--bg-color); }
         .footer-logo { height: 35px; width: auto; object-fit: contain; margin-bottom: 0.5rem; }
         .footer-col { display: flex; flex-direction: column; gap: 1rem; }
         .footer-link { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: #111; text-decoration: none; opacity: 0.5; transition: opacity 0.3s; }
@@ -207,7 +162,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header class="main-header">
         <div class="header-left">
             <a href="index.html" class="menu-trigger">← Back</a>
@@ -220,110 +174,151 @@
         </div>
     </header>
 
-    <!-- CONTENIDO DEL ARTÍCULO -->
     <article class="article-container">
-        
         <div class="article-meta">
-            <span class="article-category">Case Study</span>
-            <h1 class="article-title">The Key to Turning an Event into an Experience: Challenges, Strategies, and Success Stories in Experience Marketing</h1>
-            <span class="article-date">April 30, 2025 • By Sebastian Mora</span>
+            <span class="article-category">Strategy</span>
+            <h1 class="article-title">Measuring Experience Design: Why Traditional Event ROI Is Structurally Misleading</h1>
+            <span class="article-date">February 23, 2026 • By Marco De Giovanni</span>
         </div>
 
-        <img src="https://cdn.prod.website-files.com/67ea12a6cb5c87586b4cbec0/689d79f3e857a0545b96ca92_97d21f3dd62b8c67df29578ababcf3e5.jpg" alt="Immersive Experience Marketing" class="article-hero-img">
+        <img src="https://cdn.prod.website-files.com/67ea12a6cb5c87586b4cbec0/689d79f3e857a0545b96ca92_97d21f3dd62b8c67df29578ababcf3e5.jpg" alt="Measuring Experience Design" class="article-hero-img">
 
         <div class="article-body">
+            <p>An institution's values are revealed by what it measures, and those measurements ultimately drive its design.</p>
             
-            <h3>1. Planning and Time Management</h3>
-            <p>One of the main challenges in event planning is time management. The "planning fallacy," a psychological phenomenon identified by Kahneman and Tversky, describes the tendency to underestimate the time needed to complete complex tasks. In the context of events, this can lead to delays and unnecessary stress. To address this, several strategies have been developed to ensure adequate planning, such as:</p>
-            <ul>
-                <li><strong>Detailed timelines:</strong> Set realistic timelines with buffers for unexpected situations.</li>
-                <li><strong>Management tools:</strong> Use software like Trello or Asana to assign tasks and monitor progress.</li>
-                <li><strong>Regular meetings:</strong> Hold team meetings to review progress and adjust plans as needed.</li>
-            </ul>
+            <p>For many years, event Return on Investment (ROI) has relied on easily quantifiable metrics: attendance, ticket sales, sponsorship revenue, media reach, impressions, and production efficiency. While these indicators are immediately visible, easy to report, and provide a certain clarity, they offer an incomplete picture.</p>
+            
+            <p>The traditional approach to event ROI has structural limitations as the economic landscape is increasingly shaped by experiences that influence brand equity, investor confidence, and ecosystem development. Measuring the scale of an event is not the same as measuring its actual consequence. Similarly, measuring visibility does not equate to measuring influence.</p>
+            
+            <p>The key question is no longer about the quality of event execution.</p>
+            
+            <blockquote>
+                "Instead, the true measure of success is whether the event brought about a meaningful change."
+            </blockquote>
 
-            <h3>2. Budget and Financial Resources</h3>
-            <p>Financial management is crucial. Budget deviations can compromise the quality or even the feasibility of an event. Proper planning should include:</p>
+            <h3>The Legacy Logic of Event ROI</h3>
+            <p>The standard frameworks for measuring event success are outdated, originating from an era where events primarily served as promotional tools. In that broadcast-driven economy, investment was justified by visibility, success was defined by reach, and media exposure was the main measure of value.</p>
+            
+            <p>However, the global economy has fundamentally shifted.</p>
+            
+            <p>Modern enterprise value is overwhelmingly intangible. According to research published through the World Intellectual Property Organization (WIPO), intangible assets—such as brand value, intellectual property, organizational capital, and data—now constitute nearly 90% of the total enterprise value for leading U.S. corporations.¹ Value is now driven by perception, intellectual capital, relationships, and organizational trust, far more than by physical assets alone.</p>
+            
+            <p>Experiences directly influence these intangible drivers. They:</p>
             <ul>
-                <li><strong>Detailed budgets:</strong> Account for all potential expenses, from venue rental to unforeseen costs.</li>
-                <li><strong>Contingency funds:</strong> Set aside a percentage of the budget for emergencies.</li>
-                <li><strong>Effective negotiations:</strong> Secure beneficial agreements with vendors and sponsors.</li>
+                <li>Shape brand equity.</li>
+                <li>Reinforce leadership positioning.</li>
+                <li>Strengthen relational networks.</li>
+                <li>Signal stability and credibility.</li>
             </ul>
+            
+            <p>Despite this economic evolution, traditional event ROI frameworks have failed to keep pace. They remain designed to measure tangible outputs, not the intangible reinforcement that events now provide. The measurement logic is lagging behind the modern economy.</p>
 
-            <h3>3. Communication and Coordination</h3>
-            <p>Poor communication between organizers, vendors, and participants can lead to confusion and mistakes. Internal communication is one of the most important elements. If not handled correctly, it may result in failing to meet client expectations and wasting time and money on unnecessary activities. Strategies:</p>
+            <h3>Outputs vs Outcomes in Event Strategy</h3>
+            <p>Major gatherings, like events, summits, or forums, can appear successful based on attendance, media buzz, or flawless execution, yet still fall short of their true potential.</p>
+            
+            <p>An event might draw thousands, but fail to forge meaningful partnerships. A summit may capture substantial media attention without influencing capital investment. A flawlessly executed forum can leave underlying ecosystem dynamics unchanged.</p>
+            
+            <p>This deficiency isn't a logistical problem; it's a failure of measurement.</p>
+            
+            <p>Traditional event metrics only track outputs, what happened. True success is measured by outcomes, what changed.</p>
+            
+            <p>Experience design operates fundamentally at the level of outcomes. When institutions continue to assess experience design using conventional event metrics, they underestimate its strategic impact and, as a result, design their experiences poorly.</p>
+
+            <h3>What Should Be Measured Instead?</h3>
+            <p>For experiences to be considered effective behavioral and economic tools, their measurement must accurately reflect this function. Institutions need to move past simple surface-level metrics and examine the deeper impact.</p>
+
+            <h4>1. Relational Capital</h4>
+            <p>The foundation of high-performing ecosystems is a high density of trust.</p>
+            <p>Research across organizations consistently proves that dense, trust-based networks significantly accelerate collaboration, innovation, and the pace of transactions. Therefore, experiences designed to substantially strengthen trust among crucial stakeholders yield exponential returns that last long after the event concludes.</p>
+            <p>Key questions to consider:</p>
             <ul>
-                <li><strong>Clear channels:</strong> Establish official communication channels and protocols for sharing information.</li>
-                <li><strong>Alignment meetings:</strong> Coordinate sessions with all parties to ensure a shared vision.</li>
-                <li><strong>Accessible documentation:</strong> Centralize relevant information in shared platforms.</li>
+                <li>Did participants forge high-level relationships?</li>
+                <li>Were initial introductions successfully transformed into strategic conversations?</li>
+                <li>Was trust among key participants measurably improved?</li>
             </ul>
+            <p>These powerful, long-term returns rarely appear in immediate follow-up reports, yet they frequently represent the most significant impact of the experience.</p>
 
-            <h3>4. Vendor Management</h3>
-            <p>Coordinating multiple vendors is a complex task. Lack of communication or unfulfilled commitments can negatively affect the event. That’s why it’s important to work with agencies that have extensive experience and industry recognition, ensuring trusted, high-quality vendors. Additional recommendations include:</p>
+            <h4>2. Decision Acceleration</h4>
+            <p>Behavioral economics teaches us that uncertainty and lack of alignment are major causes of delayed action. Conversely, as clarity, familiarity, and confidence grow, the time needed for decision-making dramatically shrinks.</p>
+            <p>Therefore, effective experience design is essentially about reducing friction. This is achieved by:</p>
             <ul>
-                <li><strong>Rigorous selection:</strong> Assess vendor reputation and experience before hiring.</li>
-                <li><strong>Clear contracts:</strong> Set detailed agreements outlining responsibilities and timelines.</li>
-                <li><strong>Constant follow-up:</strong> Maintain fluid communication and monitor deliverables.</li>
+                <li>Creating a shared context.</li>
+                <li>Reinforcing alignment among participants.</li>
+                <li>Building confidence in the path forward.</li>
             </ul>
+            <p>The economic value of this acceleration is significant, even if it is not immediately reflected in traditional ROI metrics. The real-world results can manifest as partnerships secured months ahead of schedule, faster capital deployment due to reduced hesitation, or policy consensus reached sooner than anticipated.</p>
+            <p>This behavioral impact of experience design – which we explore in more detail in our analysis on the psychology of experience design – is the reason traditional event ROI frameworks often fail to capture the most critical layer of influence. Experiences fundamentally alter how people decide, not simply what they choose to attend.</p>
 
-            <h3>5. Technology and Data Security</h3>
-            <p>Digitalization has transformed event planning but also introduced data security challenges. Today, it's essential to understand how to use AI tools that can help streamline event activities. Strategies:</p>
+            <h4>3. Ecosystem Positioning</h4>
+            <p>The competitive landscape for institutions is increasingly defined by perception.</p>
+            <p>Global research on competitiveness consistently shows that a strong reputation, clear signaling of innovation, and perceived stability are critical factors in attracting talent and investment. The quality of experiences directly contributes to building these perceptual layers.</p>
+            <p>The strategic focus should shift to positioning metrics, moving beyond simple attendance counts. Key questions to evaluate the impact of an experience include:</p>
             <ul>
-                <li><strong>Secure platforms:</strong> Use software compliant with data protection regulations.</li>
-                <li><strong>Training:</strong> Educate the team on cybersecurity best practices.</li>
-                <li><strong>Emergency protocols:</strong> Develop response plans for potential data breaches.</li>
+                <li>Did the event successfully reinforce our leadership status?</li>
+                <li>Did it effectively elevate the host's perceived authority within the field?</li>
+                <li>Did it positively influence the external discourse about our broader ecosystem?</li>
             </ul>
+            <p>Measuring this impact requires longitudinal analysis and careful strategic interpretation.</p>
 
-            <h3>6. Marketing and Promotion</h3>
-            <p>A successful event needs an effective marketing strategy that is communicated through the right channels. Lack of promotion can lead to low attendance and poor ROI. It’s also important to document attendee experiences and reactions during the event. This ensures the availability of high-quality promotional material that serves as proof of the event’s success. Strategies:</p>
+            <h3>The Economic Case for Evolving Measurement</h3>
+            <p>Confidence attracts capital.</p>
+            <p>Investment decisions are repeatedly shown in behavioral research to be influenced by strategic clarity, relational trust, and perceived credibility. Therefore, experiences that enhance these psychological factors will consequently affect capital allocation.</p>
+            <p>This shift toward intangible value is not theoretical. McKinsey Global Institute research on intangible investment patterns has shown that companies allocating significantly more capital toward intangible assets — including brand development, organizational capability, and innovation — consistently outperform their peers in long-term growth.² Firms in the top quartile of intangible investment intensity demonstrate materially higher revenue expansion and resilience over time.</p>
+            <p>As businesses increasingly rely on intangible factors for growth, the impact of experiences—which shape perception, trust, identity, and alignment—cannot be adequately assessed using solely transactional metrics.</p>
+            <p>Therefore, measurement must evolve to capture how experiences strengthen these intangible sources of competitive advantage. What institutions measure determines what they design. Measuring superficial indicators inevitably leads to the design of superficial experiences.</p>
+
+            <h3>From Campaign Thinking to Strategic Architecture</h3>
+            <p>Measurement of success often falls into two contrasting frameworks:</p>
             <ul>
-                <li><strong>Multichannel campaigns:</strong> Use social media, email, and traditional media to reach your audience.</li>
-                <li><strong>Collaborations:</strong> Partner with influencers or key figures to expand reach.</li>
-                <li><strong>Engaging content:</strong> Create promotional materials that highlight the benefits of attending.</li>
+                <li><strong>Campaign Logic:</strong> Focuses on immediate visibility and is driven by short-term, media-oriented metrics.</li>
+                <li><strong>Architectural Logic:</strong> Focuses on whether the effort successfully altered long-term positioning and is driven by behavioral and cumulative metrics.</li>
             </ul>
-
-            <h3>7. Regulatory Compliance</h3>
-            <p>Organizing events requires adherence to legal regulations — from permits to safety protocols. These vary depending on the region, making it crucial to fully understand the legal context where the event is taking place. Additionally, cultural awareness is key. Even if something is legal, it might not be culturally accepted in certain areas. Strategies:</p>
+            <p>This strategic shift does not negate the importance of financial health; operational efficiency and cost management remain vital. However, these financial aspects must be integrated into a larger framework that accurately reflects both behavioral and strategic achievements.</p>
+            <p>A truly mature experience design strategy comprehensively measures success across five integrated dimensions:</p>
             <ul>
-                <li><strong>Preliminary research:</strong> Understand applicable local and national regulations.</li>
-                <li><strong>Legal consultation:</strong> Work with experts to ensure compliance.</li>
-                <li><strong>Complete documentation:</strong> Keep records of all permits and approvals.</li>
+                <li>Operational Performance</li>
+                <li>Financial Performance</li>
+                <li>Behavioral Impact</li>
+                <li>Relational Capital</li>
+                <li>Strategic Reinforcement</li>
             </ul>
+            <p>Only by adopting this holistic approach can measurement truly align with the organization's overarching institutional ambition.</p>
 
-            <h3>8. Sustainability</h3>
-            <p>Environmental awareness has driven a growing demand for sustainable events. More and more companies are seeking eco-conscious providers as part of their own sustainability commitments. Look for vendors who offer:</p>
+            <h3>The Risk of Misaligned Metrics</h3>
+            <p>Relying solely on traditional event Return on Investment (ROI) inevitably leads to predictable distortions:</p>
             <ul>
-                <li><strong>Waste reduction:</strong> Use recyclable materials and minimize printing.</li>
-                <li><strong>Eco-friendly transport:</strong> Encourage public or shared transportation.</li>
-                <li><strong>Responsible providers:</strong> Choose partners who share your sustainability values.</li>
+                <li><strong>Spectacle over Substance:</strong> Overinvestment in flash and presentation.</li>
+                <li><strong>Neglect of Curation:</strong> Underinvestment in participant selection and quality.</li>
+                <li><strong>Volume over Value:</strong> Prioritization of sheer scale rather than depth of engagement.</li>
+                <li><strong>Visibility over Impact:</strong> Emphasis on being seen rather than generating genuine influence.</li>
             </ul>
+            <p>These distortions are not arbitrary; they are the logical outcomes of the prevailing measurement framework. The discipline of experience design encourages institutions to redefine value. It achieves this not by abandoning traditional metrics, but by significantly broadening their scope.</p>
 
-            <h3>9. Hybrid and Virtual Events</h3>
-            <p>The pandemic accelerated the adoption of hybrid and virtual formats, bringing both challenges and new opportunities. Strategies:</p>
-            <ul>
-                <li><strong>Appropriate technology:</strong> Invest in platforms that provide seamless and interactive experiences.</li>
-                <li><strong>Engagement:</strong> Design activities that encourage participation from both in-person and virtual attendees.</li>
-                <li><strong>Accessibility:</strong> Ensure content is inclusive and available to all participants regardless of format.</li>
-            </ul>
+            <h3>Toward a More Mature Measurement Framework</h3>
+            <p>Effective experience design measurement requires a multi-layered approach that looks beyond immediate results.</p>
+            <p>While high-quality execution and financial accountability are essential, they are not the sole determinants of success. A mature framework must also capture behavioral shifts, the cultivation of trust, the building of ecosystem credibility, and the establishment of long-term positioning.</p>
+            <p>Simply tracking attendance or similar superficial metrics is insufficient for organizations like governments attracting foreign investment, luxury brands asserting authority, or innovation ecosystems driving sector growth. The true measure of success lies in what endures.</p>
 
-            <h3>10. Success Stories: Circolo.Life and the 3BK Event</h3>
-            <p>Circolo.Life has proven itself a leader in organizing innovative events. A standout example is the "3BK" event, which combined creativity and technology to deliver a one-of-a-kind experience. The event stood out by being "the first of its kind" — the first conference ever held in the air, aboard a chartered airplane. It was more than a flight; it was a moment of connection that resulted in business deals and brought together the most influential figures in the industry.</p>
-            <ul>
-                <li><strong>Innovation:</strong> Integration of disruptive elements that amazed attendees.</li>
-                <li><strong>Collaboration:</strong> Joint efforts with various brands and artists to enrich the experience.</li>
-                <li><strong>Positive feedback:</strong> High levels of attendee satisfaction and engagement.</li>
-            </ul>
+            <h3>The Strategic Implication</h3>
+            <p>Measurement is fundamentally philosophical, not administrative. The metrics an institution chooses to track reveal its core belief about the purpose of experience.</p>
+            <p>If experience is merely a promotional tool, focusing on outputs is sufficient. If, however, experience is understood as a strategic instrument for influencing behavior and improving economic positioning, the approach to measurement must evolve.</p>
+            <p>Experience design transcends shaping environments; it is about redefining value itself. Institutions that align their measurement frameworks with this deeper, strategic understanding will transform not only how they design but also how they compete.</p>
+            
+            <p>While execution is visible, strategic impact is cumulative. Capturing this cumulative impact demands a deeper logic than traditional event-based Return on Investment (ROI) can offer.</p>
 
-            <h3>Conclusion</h3>
-            <p>Event planning is a multifaceted discipline requiring foresight, adaptability, and a deep understanding of audience needs. By addressing and overcoming these challenges, it’s possible to create unforgettable experiences that achieve set objectives and leave a lasting impact. Knowing your audience and the environment in which the event will take place is key. It allows you to execute thoughtful details that exceed expectations and create memorable moments for every participant.</p>
+            <div class="references">
+                <h5>References</h5>
+                <p>¹ World Intellectual Property Organization (WIPO), <em>The Value of Intangible Assets of Corporations Worldwide</em>, Global Innovation Index research.</p>
+                <p>² McKinsey Global Institute, <em>The Rise of Intangible Capitalism</em>.</p>
+            </div>
+
         </div>
 
         <nav class="back-nav">
             <a href="index.html#journal" class="back-link">Return to Journal</a>
         </nav>
-
     </article>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-col">
             <img class="footer-logo" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Logo%20without%20life-09.png" alt="CIRCOLO">
@@ -335,6 +330,5 @@
             <a href="mailto:info@circololife.com" class="footer-link">Contact</a>
         </div>
     </footer>
-
 </body>
 </html>
