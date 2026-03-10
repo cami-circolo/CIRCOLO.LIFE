@@ -142,7 +142,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: absolute; /* Cambiado de fixed a absolute */
+            position: absolute;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -204,7 +204,7 @@
         .nav-dropdown {
             position: absolute;
             top: 100%; 
-            left: 3rem; /* Alineado con el padding del header */
+            left: 3rem; 
             margin-top: 15px; 
             background-color: rgba(249, 248, 246, 0.95); 
             backdrop-filter: blur(15px); 
@@ -323,13 +323,24 @@
             z-index: 1;
         }
 
+        .hero-bg-img-fallback {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
         .hero-bg-video {
+            position: absolute;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
             opacity: 1; 
-            transition: transform 6s ease;
+            z-index: 1;
+            transition: opacity 1.5s ease, transform 6s ease;
         }
         
         .hero-overlay {
@@ -339,7 +350,7 @@
             z-index: 2;
         }
         
-        .hero:hover .hero-bg-video { 
+        .hero:hover .hero-bg-video, .hero:hover .hero-bg-img-fallback { 
             transform: scale(1.03);
         }
         
@@ -358,7 +369,7 @@
         
         .hero-content p {
             color: #FFFFFF;
-            text-transform: none; /* ← Cambiado de uppercase a none para respetar minúsculas y mayúsculas */
+            text-transform: none; /* ← Respetar minúsculas y mayúsculas */
             letter-spacing: 0.25em;
             font-size: 0.85rem;
             margin-top: 1.5rem;
@@ -487,7 +498,7 @@
             padding: 0 1rem;
         }
 
-        /* Reels Containers (Fotos Restauradas) */
+        /* Reels Containers */
         .celebrate-reel-container, .create-reel-container, .craft-reel-container, .connect-reel-container { 
             width: 100%; 
             max-width: 300px;
@@ -970,7 +981,7 @@
             transition: width 0.3s ease;
         }
 
-        /* --- FOOTER GENERAL (LUXURY BUTTONS) --- */
+        /* --- FOOTER GENERAL --- */
         footer {
             padding: 5rem 3rem;
             display: flex;
@@ -1056,7 +1067,7 @@
             .footer-link { width: 100%; max-width: 280px; text-align: center; padding: 1rem; }
         }
 
-        /* --- WHATSAPP WIDGET (UNIFICADO EXPANDIBLE) --- */
+        /* --- WHATSAPP WIDGET --- */
         .whatsapp-widget {
             position: fixed;
             bottom: 40px;
@@ -1203,12 +1214,17 @@
         </div>
     </header>
 
-    <!-- HERO CON VIDEO NATIVO MP4 -->
+    <!-- HERO CON VIDEO NATIVO -->
     <section class="hero" id="hero">
         <div class="hero-image-container">
-            <video class="hero-bg-video" autoplay loop muted playsinline poster="https://uploads.onecompiler.io/4474z9257/44ad3qvge/DSCF0074.webp">
+            <!-- IMAGEN DE FONDO QUE SE VERÁ CUANDO EL VIDEO TERMINE -->
+            <img class="hero-bg-img-fallback" src="https://uploads.onecompiler.io/4474z9257/44ad3qvge/DSCF0074.webp" alt="Circolo Legacy">
+            
+            <!-- VIDEO SIN LA ETIQUETA LOOP -->
+            <video id="mainHeroVideo" class="hero-bg-video" autoplay muted playsinline poster="https://uploads.onecompiler.io/4474z9257/44ad3qvge/DSCF0074.webp">
                 <source src="Circolo%202.mp4" type="video/mp4">
             </video>
+            
             <div class="hero-overlay"></div>
         </div>
         
@@ -1566,7 +1582,7 @@
         </div>
     </section>
 
-    <!-- FOOTER CON BOTONES CÁPSULA (PILL BUTTONS) -->
+    <!-- FOOTER CON BOTONES CÁPSULA -->
     <footer id="contact">
         <div class="footer-col">
             <img class="footer-logo" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Logo%20without%20life-09.png" alt="CIRCOLO">
@@ -1584,12 +1600,8 @@
         <div class="whatsapp-trigger" onclick="toggleContactWidget()">
             <img class="whatsapp-icon-img" src="https://uploads.onecompiler.io/44apkjp8s/44apkn28k/Circolo%20Gradient%20Icon@2x.png" alt="Contact">
         </div>
-        
         <div class="whatsapp-options">
             <a href="https://wa.link/aq8x7a" target="_blank" class="whatsapp-opt" data-label="Contact I">
-                <svg class="whatsapp-icon-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-            </a>
-            <a href="https://wa.link/61m8e0" target="_blank" class="whatsapp-opt" data-label="Contact II">
                 <svg class="whatsapp-icon-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
             </a>
         </div>
@@ -1597,7 +1609,6 @@
 
     <!-- Scripts -->
     <script>
-        // MENU LOGIC
         function toggleMenu() {
             const dropdown = document.getElementById('nav-dropdown');
             const menuText = document.getElementById('menu-text');
@@ -1617,15 +1628,17 @@
                 menuText.textContent = "Menu";
             }
         }
-
-        // CERRAR MENU SI SE HACE CLICK FUERA
-        document.addEventListener('click', function(event) {
+        
+        function openContactWidget(event) {
+            if(event) event.preventDefault(); 
             const dropdown = document.getElementById('nav-dropdown');
-            const trigger = document.querySelector('.menu-trigger');
-            if (dropdown && dropdown.classList.contains('open') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
-                closeMenu();
+            if (dropdown && dropdown.classList.contains('open')) {
+                toggleMenu();
             }
+            toggleContactWidget(true);
+        }
 
+        function toggleContactWidget(forceOpen = false) {
             const widget = document.getElementById('whatsapp-widget');
             if (forceOpen) {
                 widget.classList.add('expanded');
@@ -1641,6 +1654,12 @@
         });
 
         document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('nav-dropdown');
+            const trigger = document.querySelector('.menu-trigger');
+            if (dropdown && dropdown.classList.contains('open') && !trigger.contains(event.target) && !dropdown.contains(event.target)) {
+                closeMenu();
+            }
+
             const widget = document.getElementById('whatsapp-widget');
             const contactLinks = document.querySelectorAll('a[onclick*="openContactWidget"]');
             let isContactLink = false;
@@ -1651,7 +1670,17 @@
             }
         });
 
-        // Data for Team Members
+        // LÓGICA DE FADE PARA EL VIDEO AL TERMINAR
+        document.addEventListener("DOMContentLoaded", function() {
+            const heroVideo = document.getElementById('mainHeroVideo');
+            if (heroVideo) {
+                heroVideo.addEventListener('ended', function() {
+                    // Cuando termina, se desvanece suavemente para revelar la imagen detrás
+                    this.style.opacity = '0';
+                });
+            }
+        });
+
         const teamMembers = [
             { name: "Alvaro Daza", role: "Founder & CEO", link: "https://www.linkedin.com/in/alvdaza/" },
             { name: "Marco Giovanni", role: "Co-Founder & COO", link: "https://www.linkedin.com/in/marcodegiovanni007/" },
@@ -1702,17 +1731,38 @@
         }
 
         const translations = {
-            en: { 
-                menu: "Menu", inquire: "Inquire", heroTitle: "Creating Legacy Experiences", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "THE CONCEPT", manifestoText: "Life is a sequence of moments, shaped by people, anchored in places, and remembered through objects.", manifestoSub: "We are The Culture Layer for Living Legacy Experiences.", shapesSubtitle: "PROJECTS", shapesTitle: "Design the Circle", shapesText: "Most industries treat life as fragments. We build the system that makes the pieces compound.", pillar1Sub: "Dinners • Forums • Rituals", pillar1Title: "Connecting People", pillar1Desc: "At Circolo, we design moments that bring the right people together. Our experiences are created with intention, encouraging real conversations, collaboration, and lasting relationships. Every setting is thoughtfully designed so connections feel natural and meaningful.", pillar2Sub: "We celebrate life through immersive brand experiences.", pillar2Title: "Celebrating Moments", pillar2Desc: "Circolo creates immersive brand experiences, private gatherings, and cultural moments designed to last beyond the day itself. Each experience is thoughtfully crafted to spark connection, turning people coming together into shared memories.", pillar3Sub: "Design • Architecture • Production", pillar3Title: "Creating Places", pillar3Desc: "We create places that express identity with intention and permanence. Our work spans hospitality design, cultural pavilions, and architectural renovations rooted in place and purpose. Each space is shaped to reflect values, context, and long-term vision not trends. We believe true designs when done right turn places into legacy.", pillar4Sub: "Products (Circles ticketing / CRM • Swag • Cards)", pillar4Title: "Crafting Editions", pillar4Desc: "We craft limited-edition objects and collectibles designed to carry meaning. Each piece helps preserve the story of an experience and extend it beyond the moment. Culture lives on through what people keep and pass on.", contextSubtitle: "THE HUMAN PROBLEM", contextTitle: "Connection is no longer optional. It is infrastructure.", stat1: "People experiencing loneliness worldwide", stat2: "Experiences Industry Growth Forecast", stat3: "Branded Residences by 2030", globalSubtitle: "ICONIC 2026", globalTitle: "Across Borders", pressSubtitle: "SIGNAL & PRESS", teamSubtitle: "THE COLLECTIVE", teamTitle: "Minds Behind the Legacy", contact: "Contact" 
+            en: {
+                menu: "Menu", inquire: "Inquire", heroTitle: "Creating Legacy Experiences", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "THE CONCEPT", manifestoText: "Life is a sequence of moments, shaped by people, anchored in places, and remembered through objects.", manifestoSub: "We are The Culture Layer for Living Legacy Experiences.", shapesSubtitle: "PROJECTS", shapesTitle: "Design the Circle", shapesText: "Most industries treat life as fragments. We build the system that makes the pieces compound.", pillar1Sub: "Dinners • Forums • Rituals", pillar1Title: "Connecting People", pillar1Desc: "At Circolo, we design moments that bring the right people together. Our experiences are created with intention, encouraging real conversations, collaboration, and lasting relationships. Every setting is thoughtfully designed so connections feel natural and meaningful.", pillar2Sub: "We celebrate life through immersive brand experiences.", pillar2Title: "Celebrating Moments", pillar2Desc: "Circolo creates immersive brand experiences, private gatherings, and cultural moments designed to last beyond the day itself. Each experience is thoughtfully crafted to spark connection, turning people coming together into shared memories.", pillar3Sub: "Design • Architecture • Production", pillar3Title: "Creating Places", pillar3Desc: "We create places that express identity with intention and permanence. Our work spans hospitality design, cultural pavilions, and architectural renovations rooted in place and purpose. Each space is shaped to reflect values, context, and long-term vision not trends. We believe true designs when done right turn places into legacy.", pillar4Sub: "Products (Circles ticketing / CRM • Swag • Cards)", pillar4Title: "Crafting Editions", pillar4Desc: "We craft limited-edition objects and collectibles designed to carry meaning. Each piece helps preserve the story of an experience and extend it beyond the moment. Culture lives on through what people keep and pass on.", contextSubtitle: "THE HUMAN PROBLEM", contextTitle: "Connection is no longer optional. It is infrastructure.", stat1: "People experiencing loneliness worldwide", stat2: "Experiences Industry Growth Forecast", stat3: "Branded Residences by 2030", globalSubtitle: "ICONIC 2026", globalTitle: "Across Borders", pressSubtitle: "SIGNAL & PRESS", teamSubtitle: "THE COLLECTIVE", teamTitle: "Minds Behind the Legacy", contact: "Contact"
             },
-            es: { 
-                menu: "Menú", inquire: "Consultar", heroTitle: "Creando Experiencias de Legado", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "EL CONCEPTO", manifestoText: "La vida es una secuencia de momentos, moldeados por personas, anclados en lugares y recordados a través de objetos.", manifestoSub: "Somos la Capa Cultural para Experiencias de Legado Vivo.", shapesSubtitle: "PROYECTOS", shapesTitle: "Diseña el Círculo", shapesText: "La mayoría de industrias tratan la vida como fragmentos. Nosotros construimos el sistema que hace que las piezas se compongan.", pillar1Sub: "Cenas • Foros • Rituales", pillar1Title: "Conectando Personas", pillar1Desc: "En Circolo, diseñamos momentos que reúnen a las personas adecuadas. Nuestras experiencias se crean con intención, fomentando conversaciones reales, colaboración y relaciones duraderas. Cada entorno está cuidadosamente diseñado para que las conexiones se sientan naturales y significativas.", pillar2Sub: "Celebramos la vida a través de experiencias de marca inmersivas.", pillar2Title: "Celebrando Momentos", pillar2Desc: "Circolo crea experiencias de marca inmersivas, reuniones privadas y momentos culturales diseñados para perdurar más allá del día en sí. Cada experiencia está cuidadosamente elaborada para despertar la conexión, convirtiendo la unión de las personas en recuerdos compartidos.", pillar3Sub: "Diseño • Arquitectura • Producción", pillar3Title: "Creando Lugares", pillar3Desc: "Creamos lugares que expresan identidad con intención y permanencia. Nuestro trabajo abarca diseño de hospitalidad, pabellones culturales y renovaciones arquitectónicas arraigadas en el lugar y el propósito. Cada espacio se forma para reflejar valores, contexto y visión a largo plazo, no tendencias. Creemos que los verdaderos diseños, cuando se hacen bien, convierten los lugares en legado.", pillar4Sub: "Productos (Tickets Circles / CRM • Swag • Tarjetas)", pillar4Title: "Elaborando Ediciones", pillar4Desc: "Elaboramos objetos y coleccionables de edición limitada diseñados para portar significado. Cada pieza ayuda a preservar la historia de una experiencia y extenderla más allá del momento. La cultura vive a través de lo que las personas guardan y transmiten.", contextSubtitle: "EL PROBLEMA HUMANO", contextTitle: "La conexión ya no es opcional. Es infraestructura.", stat1: "Personas experimentando soledad globalmente", stat2: "Pronóstico de Crecimiento Industria Eventos", stat3: "Residencias de Marca para 2030", globalSubtitle: "ICONIC 2026", globalTitle: "A Través de Fronteras", pressSubtitle: "SEÑAL Y PRENSA", teamSubtitle: "EL COLECTIVO", teamTitle: "Mentes tras el Legado", contact: "Contacto" 
+            es: {
+                menu: "Menú", inquire: "Consultar", heroTitle: "Creando Experiencias de Legado", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "EL CONCEPTO", manifestoText: "La vida es una secuencia de momentos, moldeados por personas, anclados en lugares y recordados a través de objetos.", manifestoSub: "Somos la Capa Cultural para Experiencias de Legado Vivo.", shapesSubtitle: "PROYECTOS", shapesTitle: "Diseña el Círculo", shapesText: "La mayoría de industrias tratan la vida como fragmentos. Nosotros construimos el sistema que hace que las piezas se compongan.", pillar1Sub: "Cenas • Foros • Rituales", pillar1Title: "Conectando Personas", pillar1Desc: "En Circolo, diseñamos momentos que reúnen a las personas adecuadas. Nuestras experiencias se crean con intención, fomentando conversaciones reales, colaboración y relaciones duraderas. Cada entorno está cuidadosamente diseñado para que las conexiones se sientan naturales y significativas.", pillar2Sub: "Celebramos la vida a través de experiencias de marca inmersivas.", pillar2Title: "Celebrando Momentos", pillar2Desc: "Circolo crea experiencias de marca inmersivas, reuniones privadas y momentos culturales diseñados para perdurar más allá del día en sí. Cada experiencia está cuidadosamente elaborada para despertar la conexión, convirtiendo la unión de las personas en recuerdos compartidos.", pillar3Sub: "Diseño • Arquitectura • Producción", pillar3Title: "Creando Lugares", pillar3Desc: "Creamos lugares que expresan identidad con intención y permanencia. Nuestro trabajo abarca diseño de hospitalidad, pabellones culturales y renovaciones arquitectónicas arraigadas en el lugar y el propósito. Cada espacio se forma para reflejar valores, contexto y visión a largo plazo, no tendencias. Creemos que los verdaderos diseños, cuando se hacen bien, convierten los lugares en legado.", pillar4Sub: "Productos (Tickets Circles / CRM • Swag • Tarjetas)", pillar4Title: "Elaborando Ediciones", pillar4Desc: "Elaboramos objetos y coleccionables de edición limitada diseñados para portar significado. Cada pieza ayuda a preservar la historia de una experiencia y extenderla más allá del momento. La cultura vive a través de lo que las personas guardan y transmiten.", contextSubtitle: "EL PROBLEMA HUMANO", contextTitle: "La conexión ya no es opcional. Es infraestructura.", stat1: "Personas experimentando soledad globalmente", stat2: "Pronóstico de Crecimiento Industria Eventos", stat3: "Residencias de Marca para 2030", globalSubtitle: "ICONIC 2026", globalTitle: "A Través de Fronteras", pressSubtitle: "SEÑAL Y PRENSA", teamSubtitle: "EL COLECTIVO", teamTitle: "Mentes tras el Legado", contact: "Contacto"
             },
-            ar: { menu: "القائمة", inquire: "استفسار", heroTitle: "خلق تجارب الإرث", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "المفهوم", manifestoText: "الحياة سلسلة من اللحظات، تشكلها الناس، وترتكز في الأماكن، وتُذكر من خلال الأشياء.", manifestoSub: "نحن الطبقة الثقافية لتجارب الإرث الحية.", shapesSubtitle: "المشاريع", shapesTitle: "صمم الدائرة", shapesText: "تتعامل معظم الصناعات مع الحياة كشظايا. نحن نبني النظام الذي يجعل القطع تتكامل.", pillar1Sub: "الاتصال", pillar1Title: "الناس", pillar1Desc: "بيت سيركولو. الثقة والانتماء والإشارة. نحن لا نملأ غرفة فقط؛ نحن ننسق الرعاية التي تقود تدفق الصفقات والتعاون.", pillar2Sub: "الاحتفال", pillar2Title: "اللحظات", pillar2Desc: "الشرارة. التجارب ليست 'أحداثًا'. إنها لحظات إرث مصممة هندسيًا. إطلاق العلامات التجارية والطقوس والمعالم الثقافية.", pillar3Sub: "الإبداع", pillar3Title: "الأماكن", pillar3Desc: "ترسيخ الهوية. حيث يصبح الذوق دائمًا. مفاهيم الضيافة والتجديدات والأجنحة التي تحمل الثقافة.", pillar4Sub: "الصناعة", pillar4Title: "الإصدارات", pillar4Desc: "تكنولوجيا الذاكرة. الأشياء والكتب والمقتنيات. ليست 'بضائع'، بل أشياء ثقافية تبقي القصة حية.", contextSubtitle: "المشكلة البشرية", contextTitle: "الاتصال لم يعد اختياريًا. إنه بنية تحتية.", stat1: "شخص يعاني من الوحدة في جميع أنحاء العالم", stat2: "توقعات نمو صناعة الفعاليات", stat3: "المساكن ذات العلامات التجارية بحلول عام 2030", globalSubtitle: "أيقونة 2026", globalTitle: "عبر الحدود", pressSubtitle: "الإشارة والصحافة", teamSubtitle: "المجموعة", teamTitle: "عقول خلف الإرث", contact: "اتصل بنا" }
+            ar: {
+                menu: "القائمة", inquire: "استفسار", heroTitle: "خلق تجارب الإرث", heroSub: "Built For Humans Of Now And The Future", manifestoLabel: "المفهوم", manifestoText: "الحياة سلسلة من اللحظات، تشكلها الناس، وترتكز في الأماكن، وتُذكر من خلال الأشياء.", manifestoSub: "نحن الطبقة الثقافية لتجارب الإرث الحية.", shapesSubtitle: "المشاريع", shapesTitle: "صمم الدائرة", shapesText: "تتعامل معظم الصناعات مع الحياة كشظايا. نحن نبني النظام الذي يجعل القطع تتكامل.", pillar1Sub: "الاتصال", pillar1Title: "الناس", pillar1Desc: "بيت سيركولو. الثقة والانتماء والإشارة. نحن لا نملأ غرفة فقط؛ نحن ننسق الرعاية التي تقود تدفق الصفقات والتعاون.", pillar2Sub: "الاحتفال", pillar2Title: "اللحظات", pillar2Desc: "الشرارة. التجارب ليست 'أحداثًا'. إنها لحظات إرث مصممة هندسيًا. إطلاق العلامات التجارية والطقوس والمعالم الثقافية.", pillar3Sub: "الإبداع", pillar3Title: "الأماكن", pillar3Desc: "ترسيخ الهوية. حيث يصبح الذوق دائمًا. مفاهيم الضيافة والتجديدات والأجنحة التي تحمل الثقافة.", pillar4Sub: "الصناعة", pillar4Title: "الإصدارات", pillar4Desc: "تكنولوجيا الذاكرة. الأشياء والكتب والمقتنيات. ليست 'بضائع'، بل أشياء ثقافية تبقي القصة حية.", contextSubtitle: "المشكلة البشرية", contextTitle: "الاتصال لم يعد اختياريًا. إنه بنية تحتية.", stat1: "شخص يعاني من الوحدة في جميع أنحاء العالم", stat2: "توقعات نمو صناعة الفعاليات", stat3: "المساكن ذات العلامات التجارية بحلول عام 2030", globalSubtitle: "أيقونة 2026", globalTitle: "عبر الحدود", pressSubtitle: "الإشارة والصحافة", teamSubtitle: "المجموعة", teamTitle: "عقول خلف الإرث", contact: "اتصل بنا"
+            }
         };
-        
-        function setLanguage(lang) { document.querySelector('.current-lang').textContent=lang.toUpperCase(); if(lang==='ar'){document.body.setAttribute('dir','rtl');}else{document.body.setAttribute('dir','ltr');} const t=translations[lang]||translations['en']; document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n'); if(t[k]){e.style.opacity=0;setTimeout(()=>{e.textContent=t[k];e.style.opacity=1;},200);}}); }
-        
+
+        function setLanguage(lang) {
+            document.querySelector('.current-lang').textContent = lang.toUpperCase();
+            if (lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+            } else {
+                document.body.setAttribute('dir', 'ltr');
+            }
+            
+            const t = translations[lang] || translations['en'];
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (t[key]) {
+                    element.style.opacity = 0;
+                    setTimeout(() => {
+                        element.textContent = t[key];
+                        element.style.opacity = 1;
+                    }, 200);
+                }
+            });
+        }
+
         // Image Reel Logic
         const celebrateImages = document.querySelectorAll('.celebrate-img');
         if(celebrateImages.length > 0){
@@ -1763,7 +1813,11 @@
             }, 500);
         }
 
-        window.addEventListener('scroll', function() { const h=document.getElementById('header'); if(window.scrollY>50)h.classList.add('scrolled'); else h.classList.remove('scrolled'); });
+        window.addEventListener('scroll', function() { 
+            const h = document.getElementById('header'); 
+            if(window.scrollY > 50) h.classList.add('scrolled'); 
+            else h.classList.remove('scrolled'); 
+        });
     </script>
 </body>
 </html>
